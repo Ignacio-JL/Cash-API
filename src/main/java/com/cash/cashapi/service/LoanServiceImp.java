@@ -28,44 +28,7 @@ public class LoanServiceImp implements LoanService{
 	private final LoanResponseMapper loanResponseMapper;
 	private final PageInfoResponseMapper pageInfoResponseMapper;
 	
-	@Override
-	public Loan saveLoan(Loan loan) {
-		
-		try {
-			User userLoan = userRepository.findById(loan.getUserId()).get();
-			userLoan.getLoans().add(loan);
-				userRepository.save(userLoan);
-			} catch (Exception e) {
-				System.out.println("El error es: "+e);
-			}
-			
-			return loanRepository.save(loan);
-		
-	}
-
-	@Override
-	public Loan getLoan(Long idLoan) {
-		return loanRepository.findById(idLoan).orElseThrow(() -> {throw new RuntimeException();});
-	}
-
-	@Override
-	public Loan updateLoan(Long id, Loan loan) {
-		Loan loanToUpdate = loanRepository.findById(id).get();
-		loanToUpdate.setTotal(loan.getTotal());
-		//omito actualizar el propietario del prestamo
-		return loanRepository.save(loanToUpdate);
-	}
-
-	@Override
-	public boolean deleteLoan(Long id) {
-		try {
-			loanRepository.deleteById(id);
-			return true;
-			
-		} catch (Exception e) {
-			return false;
-		}
-	}
+	
 
 	@Override
 	public LoanResponse findAllLoansWithPagination(int offset, int pageSize) {
@@ -107,6 +70,15 @@ public class LoanServiceImp implements LoanService{
 		return loanResponse;
 	}
 	
+	@Override
+	public Loan saveLoan(Loan loan) {
+
+			User userLoan = userRepository.findById(loan.getUserId()).get();
+			userLoan.getLoans().add(loan);
+			userRepository.save(userLoan);
+			return loanRepository.save(loan);
+		
+	}
 
 	
 }

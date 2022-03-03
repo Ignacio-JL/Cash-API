@@ -7,6 +7,7 @@ Iniciar como Springboot Application, en http://localhost:8080
 ## Conexion a una base de datos embebida utilizando Java Persistence API (JPA)
 Utilizacion de base de datos h2
 Insercion de datos para prueba, con InitializingBean en CashApiAplication.java, main
+
 4 Users (id 1,2,3,4)
 30 Loans
 Distribucion Loans:

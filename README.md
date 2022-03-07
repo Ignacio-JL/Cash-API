@@ -23,3 +23,6 @@ Distribucion Loans:
 * User Name: h2
 * Password: h2
 
+## Uso de logs Log4j 2
+Implementacion basica de logs y errores en la clase ExceptionHandler.
+Modelado de la informacion expuesta en el archivo "app.log" (logs/app.log) y su respectiva configuracion en "log4j2.properties"

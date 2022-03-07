@@ -30,7 +30,7 @@ public class UserController {
 			return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
 			
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
 	}
@@ -40,7 +40,7 @@ public class UserController {
 		try {
 			return new ResponseEntity<User>(userService.getUser(idUser), HttpStatus.OK);			
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -52,7 +52,7 @@ public class UserController {
 			return new ResponseEntity<User>(HttpStatus.OK);			
 		}
 		else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 }

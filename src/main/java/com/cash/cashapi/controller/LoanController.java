@@ -28,7 +28,7 @@ public class LoanController {
 		try {
 			return new ResponseEntity<Loan>(loanService.saveLoan(loan), HttpStatus.CREATED);			
 		} catch (Exception e) {
-			return new ResponseEntity<Loan>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Loan>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -37,16 +37,16 @@ public class LoanController {
 	public ResponseEntity<LoanResponse> getLoansWithPagination(@RequestParam(value = "page") int offset, @RequestParam(value = "size") int pageSize, @RequestParam(value = "user_id", required = false) String userId){
 		LoanResponse allLoansWithPagination = new LoanResponse();
 		
-		if(userId == null) {
-			allLoansWithPagination = loanService.findAllLoansWithPagination(offset, pageSize);
-		}
-		else {
-			allLoansWithPagination = loanService.findAllLoansWithPaginationAndFilter(offset, pageSize, Long.parseLong(userId));
-		}
 		try {
+			if(userId == null) {
+				allLoansWithPagination = loanService.findAllLoansWithPagination(offset, pageSize);
+			}
+			else {
+				allLoansWithPagination = loanService.findAllLoansWithPaginationAndFilter(offset, pageSize, Long.parseLong(userId));
+			}
 			return new ResponseEntity<LoanResponse>(allLoansWithPagination, HttpStatus.OK);			
 		} catch (Exception e) {
-			return new ResponseEntity<LoanResponse>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<LoanResponse>(HttpStatus.BAD_REQUEST);
 		}
 		
 	}
